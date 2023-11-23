@@ -10,6 +10,7 @@ export default class Movies extends Component {
       parr:[1],
       currPage:1,
       movies:[],
+      favourites:[],
   }
   }
   async componentDidMount(){
@@ -55,6 +56,27 @@ export default class Movies extends Component {
       },this.changeMovies)
     }
   }
+
+  handleFavourites=(movie)=>{
+    let oldData = JSON.parse(localStorage.getItem('movies-app') || '[]')
+    if(this.state.favourites.includes(movie.id)){
+      oldData= oldData.filter((m)=>m.id!==movie.id)
+    }else{
+      oldData.push(movie);
+    }
+    localStorage.setItem("movies-app",JSON.stringify(oldData));
+    console.log(oldData)
+   this.handleFavouritesState();
+  }
+
+  handleFavouritesState=()=>{
+    let oldData = JSON.parse(localStorage.getItem('movies-app') || '[]')
+    let temp = oldData.map((movie)=>movie.id);
+    this.setState({
+      favourites:[...temp]
+    })
+  }
+
   render() {
     // let movie=movies.results
     return (
@@ -76,7 +98,7 @@ export default class Movies extends Component {
                        
                       {
                         this.state.hover===movieobj.id &&
-                        <a className="btn btn-primary movies-button">Add to Favourites</a>
+                        <a className="btn btn-primary movies-button" onClick={()=>this.handleFavourites(movieobj)}>{this.state.favourites.includes(movieobj.id)?'Remove from Favourites':'Add to Favourites'}</a>
                       }
                       
                       </div>
