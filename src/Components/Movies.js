@@ -88,17 +88,17 @@ export default class Movies extends Component {
         <h3 className='text-center'><strong>Trending</strong></h3>
         <div className='movies-list' >
             {
-                this.state.movies.map((movieobj)=>(
-                    <div className="card movies-card" onMouseEnter={()=>this.setState({hover:movieobj.id})} onMouseLeave={()=>this.setState({hover:''})}>
-                    <img src={`https://image.tmdb.org/t/p/original${movieobj.backdrop_path}`} alt = {movieobj.title} className="card-img-top movies-img"/>
+                this.state.movies.map((movieObj)=>(
+                    <div className="card movies-card" onMouseEnter={()=>this.setState({hover:movieObj.id})} onMouseLeave={()=>this.setState({hover:''})}>
+                    <img src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`} alt = {movieObj.title} className="card-img-top movies-img"/>
                     {/* <div className="card-body"> */}
-                      <h5 className="card-title movies-title">{movieobj.original_title}</h5>
-                      {/* <p className="card-text movies-text">{movieobj.overview}</p> */}
+                      <h5 className="card-title movies-title">{movieObj.original_title}</h5>
+                      {/* <p className="card-text movies-text">{movieObj.overview}</p> */}
                       <div className='button-wrapper' style={{display:'flex', width:'100%', justifyContent:'center'}}>
                        
                       {
-                        this.state.hover===movieobj.id &&
-                        <a className="btn btn-primary movies-button" onClick={()=>this.handleFavourites(movieobj)}>{this.state.favourites.includes(movieobj.id)?'Remove from Favourites':'Add to Favourites'}</a>
+                        this.state.hover===movieObj.id &&
+                        <a className="btn btn-primary movies-button" onClick={()=>this.handleFavourites(movieObj)}>{this.state.favourites.includes(movieObj.id)?'Remove from Favourites':'Add to Favourites'}</a>
                       }
                       
                       </div>
