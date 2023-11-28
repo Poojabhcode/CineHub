@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import {movies} from './getMovies'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class Movies extends Component {
   constructor(){
@@ -11,8 +11,13 @@ export default class Movies extends Component {
       currPage:1,
       movies:[],
       favourites:[],
+      moviesdetail:[],
+      movieDet:[],
+    
   }
   }
+
+
   async componentDidMount(){
     const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=cb7012bf697e01ee5513c946a67f2fe9&language=en-US&page=${this.state.currPage}`);
     let data = res.data;
@@ -77,6 +82,27 @@ export default class Movies extends Component {
     })
   }
 
+ handleMovieData=(movie)=>{
+  let oldDetailsData = JSON.parse(localStorage.getItem('movies-app2') || '[]')
+  oldDetailsData.pop();
+  if(this.state.movieDet.includes(movie.id)){
+    oldDetailsData= oldDetailsData.filter((m)=>m.id!==movie.id)
+  }else{
+    oldDetailsData.push(movie);
+  }
+  localStorage.setItem("movies-app2",JSON.stringify(oldDetailsData));
+  oldDetailsData.pop();
+   this.handleMovieDataState();
+ }
+
+ handleMovieDataState=()=>{
+  let oldDetailsData = JSON.parse(localStorage.getItem('movies-app2') || '[]')
+  let tempdetail = oldDetailsData.map((movie)=>movie.id);
+  this.setState({
+    movieDet:[...tempdetail]
+  })
+}
+
   render() {
     // let movie=movies.results
     return (
@@ -89,8 +115,8 @@ export default class Movies extends Component {
         <div className='movies-list' >
             {
                 this.state.movies.map((movieObj)=>(
-                    <div className="card movies-card" onMouseEnter={()=>this.setState({hover:movieObj.id})} onMouseLeave={()=>this.setState({hover:''})}>
-                    <img src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`} alt = {movieObj.title} className="card-img-top movies-img"/>
+                    <div className="card movies-card" onMouseEnter={()=>this.setState({hover:movieObj.id})} onMouseLeave={()=>this.setState({hover:''})} >
+                     <Link to={{ pathname: '/moviecard'}} style={{ textDecoration: 'none' }}><img src={`https://image.tmdb.org/t/p/original${movieObj.backdrop_path}`} alt = {movieObj.title} className="card-img-top movies-img" onClick={()=>this.handleMovieData(movieObj)} /></Link>
                     {/* <div className="card-body"> */}
                       <h5 className="card-title movies-title">{movieObj.original_title}</h5>
                       {/* <p className="card-text movies-text">{movieObj.overview}</p> */}
@@ -102,7 +128,7 @@ export default class Movies extends Component {
                       }
                       
                       </div>
-                    {/* </div> */}
+                
                     </div>
                 ))
             }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {movies} from './getMovies'
 
 export default class Favourite extends Component {
   constructor(){
@@ -118,6 +117,7 @@ export default class Favourite extends Component {
     for(let i=1;i<=pages;i++){
       pagesarr.push(i);
     }  
+
     let si = (this.state.currPage-1)*this.state.limit;
     let ei = si+this.state.limit;
     filterarr = filterarr.slice(si,ei);

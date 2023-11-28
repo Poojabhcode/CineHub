@@ -2,13 +2,14 @@ import {movies} from './getMovies';
 import React, { Component } from 'react'
 
 export default class Banner extends Component {
+  
   render() {
      let movie=movies.results[0];
      console.log(movies);
+     console.log(movies.results)
 
     return (
       <>
-
          {  movie ===''?
        <div className="spinner-border text-primary" role="status">
        <span className="sr-only">Loading...</span>

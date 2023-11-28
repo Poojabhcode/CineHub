@@ -4,9 +4,11 @@ import Movies from './Components/Movies';
 import Favourite  from './Components/Favourite';
 import { BrowserRouter as Router, Switch,Route, Routes} from 'react-router-dom';
 import './App.css';
+import MovieCardDetails from './Components/MovieCardDetails';
+
 
 function App() {
-  return (  
+  return ( 
     <Router>
        <Navbar/>
           <Routes>
@@ -15,6 +17,7 @@ function App() {
                     <Movies />
                     </>} />
                 <Route path='/favourites' element={<Favourite/>} exact/>
+                <Route path='/moviecard' element={<MovieCardDetails />} /> 
           </Routes>
     </Router>
   );
