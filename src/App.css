@@ -7,6 +7,19 @@
   color: white;
 
 }
+.h1{
+  font-size: 45px;
+  background: -webkit-linear-gradient(#d70c0c,#eaf51c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.h2{
+  font-size: 30px;
+  background: -webkit-linear-gradient(#d70c0c,#e9f415);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .banner-img{
   height: 70vh;
